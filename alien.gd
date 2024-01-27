@@ -3,6 +3,11 @@ extends MeshInstance3D
 const NUMBER_OF_VERTICES: int = 3
 const EXPORT_PATH: String = "res://export_mesh.tres"
 
+@export var base_reference_mesh : NodePath
+@export var sad_reference_mesh : NodePath
+@export var amused_reference_mesh : NodePath
+@export var angry_reference_mesh : NodePath
+
 var vertex_grabbers: Dictionary = {}
 var mdt: MeshDataTool = null
 

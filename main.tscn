@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwsmrjgcswjac"]
 
-[ext_resource type="PackedScene" uid="uid://dk5xvg0klru3k" path="res://alien_mesh_instance_3d.tscn" id="1_uairt"]
+[ext_resource type="PackedScene" uid="uid://d181hsjayogol" path="res://test_alien/test_alien.tscn" id="2_oo1a0"]
 [ext_resource type="PackedScene" uid="uid://cac6k8w5okkch" path="res://emotions_ui.tscn" id="2_xsi4n"]
 
 [node name="Main" type="Node"]
@@ -9,8 +9,6 @@
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.1, 0)
 projection = 1
 size = 3.0
-
-[node name="AlienMeshInstance3D" parent="." instance=ExtResource("1_uairt")]
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
 
@@ -24,4 +22,4 @@ offset_bottom = 8.0
 grow_horizontal = 2
 text = "EXPORT"
 
-[connection signal="pressed" from="DebugExportButton" to="AlienMeshInstance3D" method="_export_current_mesh"]
+[node name="AlienMeshInstance3D" parent="." instance=ExtResource("2_oo1a0")]

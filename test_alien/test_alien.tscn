@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://d181hsjayogol"]
+
+[ext_resource type="Script" path="res://alien.gd" id="1_5af45"]
+[ext_resource type="Texture2D" uid="uid://dc01lkk0hg4q6" path="res://icon.svg" id="2_aiga8"]
+[ext_resource type="ArrayMesh" path="res://test_alien/sad_mesh.tres" id="3_ruy2t"]
+[ext_resource type="ArrayMesh" path="res://test_alien/amused_mesh.tres" id="4_rgkdw"]
+[ext_resource type="ArrayMesh" path="res://test_alien/angry_mesh.tres" id="5_8lf08"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_uk7va"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjsfl"]
+albedo_texture = ExtResource("2_aiga8")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sdqab"]
+material = SubResource("StandardMaterial3D_vjsfl")
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="AlienMeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("ImmediateMesh_uk7va")
+script = ExtResource("1_5af45")
+base_reference_mesh = NodePath("ReferenceMesh")
+sad_reference_mesh = NodePath("SadReferenceMesh")
+amused_reference_mesh = NodePath("AmusedReferenceMesh")
+angry_reference_mesh = NodePath("AngryReferenceMesh")
+
+[node name="ReferenceMesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_sdqab")
+
+[node name="SadReferenceMesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("3_ruy2t")
+
+[node name="AmusedReferenceMesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("4_rgkdw")
+skeleton = NodePath("../AngryReferenceMesh")
+
+[node name="AngryReferenceMesh" type="MeshInstance3D" parent="."]
+visible = false
+mesh = ExtResource("5_8lf08")
