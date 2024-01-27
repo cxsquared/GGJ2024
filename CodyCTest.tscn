@@ -1,29 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqfij2nw2sn0s"]
+[gd_scene load_steps=8 format=3 uid="uid://cqfij2nw2sn0s"]
 
 [ext_resource type="Shader" path="res://Dither.gdshader" id="1_1elef"]
 [ext_resource type="Script" path="res://TestImmediate.gd" id="1_adn7c"]
+[ext_resource type="Texture2D" uid="uid://3kgtiqrlkm3f" path="res://support/digital-fractal-1x.png" id="2_k8jro"]
+[ext_resource type="Texture2D" uid="uid://cewv2d5q3r5xq" path="res://support/bayer16.png" id="3_ra2qv"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_n7bhx"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bkbg"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0est"]
 shader = ExtResource("1_1elef")
-shader_parameter/u_bit_depth = null
-shader_parameter/u_contrast = null
+shader_parameter/u_bit_depth = 32
+shader_parameter/u_contrast = 1.0
 shader_parameter/u_offset = null
-shader_parameter/u_dither_size = null
-shader_parameter/u_dither_tex = SubResource("ImageTexture_n7bhx")
+shader_parameter/u_dither_size = 2
+shader_parameter/u_dither_tex = ExtResource("3_ra2qv")
+shader_parameter/u_color_tex = ExtResource("2_k8jro")
 
-[sub_resource type="ImmediateMesh" id="ImmediateMesh_6wo8k"]
+[sub_resource type="SphereMesh" id="SphereMesh_cemit"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_fktqy"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_1bkbg")
-mesh = SubResource("ImmediateMesh_6wo8k")
-script = ExtResource("1_adn7c")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_r0est")
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.788398, 0, 0)
+mesh = SubResource("SphereMesh_cemit")
+skeleton = NodePath("../../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.629483, 0.777014, 0, -0.777014, 0.629483, 0, 2.01219, 1.46492)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94941)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.629483, 0.777014, 0, -0.777014, 0.629483, 0, 2.01219, 1.46492)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.687855, 0, 0)
+mesh = SubResource("ImmediateMesh_fktqy")
+skeleton = NodePath("../../..")
+script = ExtResource("1_adn7c")
