@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bderfte1m0g1s"]
+
+[ext_resource type="Script" path="res://vertex_grabber.gd" id="1_40ycg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l6aj3"]
+radius = 0.01
+
+[node name="VertexGrabber" type="Area3D"]
+script = ExtResource("1_40ycg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l6aj3")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
