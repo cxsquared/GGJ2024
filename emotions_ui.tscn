@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cac6k8w5okkch"]
+[gd_scene load_steps=8 format=3 uid="uid://cac6k8w5okkch"]
 
 [ext_resource type="Script" path="res://emotions_ui.gd" id="1_0i4il"]
+[ext_resource type="Texture2D" uid="uid://dkyhktktbrlp3" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceHappy.png" id="2_gemqs"]
+[ext_resource type="Script" path="res://EmotionBubble.gd" id="3_4ent5"]
+[ext_resource type="Texture2D" uid="uid://bkqycx7o8ag6e" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceSad.png" id="4_8tiw3"]
+[ext_resource type="Texture2D" uid="uid://ccmuwibw3xswg" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceAngry.png" id="5_06gjw"]
+[ext_resource type="Texture2D" uid="uid://cdcdtrctnsfxl" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_laugh.png" id="6_tt2y7"]
+[ext_resource type="Texture2D" uid="uid://bnpo2qe83c5mu" path="res://kenney_emotes-pack/PNG/Vector/Style 8/emote_faceAngry.png" id="7_7ohmj"]
 
 [node name="EmotionsUI" type="CanvasLayer" node_paths=PackedStringArray("amused_bar", "angry_bar", "sad_bar")]
 script = ExtResource("1_0i4il")
@@ -61,3 +67,31 @@ text = "Sad
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 760.0
+offset_top = 59.0
+offset_right = 800.0
+offset_bottom = 99.0
+scale = Vector2(2.32, 2.32)
+texture = ExtResource("2_gemqs")
+script = ExtResource("3_4ent5")
+sad_bubble = ExtResource("4_8tiw3")
+angry_bubble = ExtResource("5_06gjw")
+amused_bubble = ExtResource("6_tt2y7")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(559, 339)
+amount = 5
+texture = ExtResource("7_7ohmj")
+direction = Vector2(0, 0)
+spread = 165.11
+gravity = Vector2(0, 0)
+initial_velocity_min = 101.01
+initial_velocity_max = 202.02
+angular_velocity_min = 1.45
+angular_velocity_max = 263.27
+angle_min = -683.6
+angle_max = 393.0
+
+[connection signal="emotion_score_updated" from="." to="TextureRect" method="update_emotion"]
