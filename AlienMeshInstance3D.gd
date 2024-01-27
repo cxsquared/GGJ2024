@@ -14,6 +14,7 @@ func _ready() -> void:
 	surface_tool.create_from($ReferenceMesh.mesh, 0)
 	var array_mesh = surface_tool.commit()
 	mdt.create_from_surface(array_mesh, 0)
+	material_override = mdt.get_material()
 	
 	# Create the initial mesh. This should be the same as the reference geometry
 	mesh.surface_begin(NUMBER_OF_VERTICES)
