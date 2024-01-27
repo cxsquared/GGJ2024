@@ -3,48 +3,24 @@ extends MeshInstance3D
 const NUMBER_OF_VERTICES: int = 3
 const EXPORT_PATH: String = "res://export_mesh.tres"
 
-@export var base_reference_mesh : NodePath
-@export var sad_reference_mesh : NodePath
-@export var amused_reference_mesh : NodePath
-@export var angry_reference_mesh : NodePath
+signal score_updated(type:String, score:float)
 
 var vertex_grabbers: Dictionary = {}
 var mdt: MeshDataTool = null
-var sad_mdt: MeshDataTool = null
-var amused_mdt: MeshDataTool = null
-var angry_mdt: MeshDataTool = null
 
-@export var max_distance_score:int = 1000
-@export var min_distance_score:int = 100
-
-var sad_score:Range
-var amused_score:Range
-var angry_score:Range
-
-@export var ui:CanvasLayer
+var emotion_meshes = {}
+var emotion_mdts = {}
+var emotion_verts = {}
 
 @onready var VertexGrabberScene = preload("res://vertex_grabber.tscn")
 
 func _ready() -> void:
-	
 	#Init emotions
-	sad_mdt = MeshDataTool.new()
-	var sad_surface_tool = SurfaceTool.new()
-	sad_surface_tool.create_from($SadReferenceMesh.mesh, 0)
-	var sad_array_mesh = sad_surface_tool.commit()
-	sad_mdt.create_from_surface(sad_array_mesh, 0)
-	
-	amused_mdt = MeshDataTool.new()
-	var amused_surface_tool = SurfaceTool.new()
-	amused_surface_tool.create_from($AmusedReferenceMesh.mesh, 0)
-	var amused_array_mesh = amused_surface_tool.commit()
-	amused_mdt.create_from_surface(amused_array_mesh, 0)
-	
-	angry_mdt = MeshDataTool.new()
-	var angry_surface_tool = SurfaceTool.new()
-	angry_surface_tool.create_from($AngryReferenceMesh.mesh, 0)
-	var angry_array_mesh = angry_surface_tool.commit()
-	angry_mdt.create_from_surface(angry_array_mesh, 0)
+	emotion_meshes = {
+		"sad": $SadReferenceMesh.mesh,
+		"angry": $AngryReferenceMesh.mesh,
+		"amused": $AmusedReferenceMesh.mesh
+	}
 	
 	# Init the MeshDataTool with the reference geometry
 	mdt = MeshDataTool.new()
@@ -72,46 +48,70 @@ func _ready() -> void:
 		vertex_grabber.position = mdt.get_vertex(i)
 		add_child(vertex_grabber)
 		vertex_grabbers[i] = vertex_grabber
-
+	
+	for emotion in emotion_meshes:
+		var emotion_mdt = MeshDataTool.new()
+		var emotion_surface_tool = SurfaceTool.new()
+		emotion_surface_tool.create_from(emotion_meshes[emotion], 0)
+		var emotion_array_mesh = emotion_surface_tool.commit()
+		emotion_mdt.create_from_surface(emotion_array_mesh, 0)
+		emotion_mdts[emotion] = emotion_mdt
+		
+	for emotion in emotion_mdts:
+		emotion_verts[emotion] = get_vertex_data(emotion_mdts[emotion])
 
 func _process(_delta) -> void:
 	# Recreate the mesh using the grabbers' positions
 	mesh.clear_surfaces()
 	mesh.surface_begin(NUMBER_OF_VERTICES)
-	for face_idx in range (mdt.get_face_count()):
-		for vertex_idx in range(NUMBER_OF_VERTICES):
-			var vertex = mdt.get_face_vertex(face_idx, vertex_idx)
-			mesh.surface_set_normal(mdt.get_vertex_normal(vertex))
-			mesh.surface_set_uv(mdt.get_vertex_uv(vertex))
-			mesh.surface_add_vertex(vertex_grabbers[vertex].position)
+	var data = get_curr_vertex_data()
+	for index in data:
+		mesh.surface_set_normal(index[0])
+		mesh.surface_set_uv(index[1])
+		mesh.surface_add_vertex(index[2])
+
 	mesh.surface_end()
 	
 	_calculate_emotion()
-	
 
 func _calculate_emotion() -> void:
-	sad_score.min_value = min_distance_score
-	sad_score.max_value = max_distance_score
+	var emotion_scores = {}
 	
-	var sad_distance = 0.
-	var angry_distance = 0.
-	var amused_distance = 0.
+	for emotion in emotion_mdts:
+		emotion_scores[emotion] = 0.
+
+	var current_vert_data = get_curr_vertex_data()
+	for i in range(current_vert_data.size()):
+		var current_vertex = current_vert_data[i][2]
+			
+		for emotion in emotion_verts:
+			var emotion_vertex = emotion_verts[emotion][i][2]
+			emotion_scores[emotion] += current_vertex.distance_to(emotion_vertex)
 	
-	for vertex_idx in range (mdt.get_vertex_count()):
-		var curr_vertex = mdt.get_vertex(vertex_idx)
-		var sad_vertex = sad_mdt.get_vertex(vertex_idx)
-		var angry_vertex = angry_mdt.get_vertex(vertex_idx)
-		var amused_vertex = amused_mdt.get_vertex(vertex_idx)
-		
-		sad_distance += curr_vertex.distance_to(sad_vertex)
-		angry_distance += curr_vertex.distance_to(angry_vertex)
-		amused_distance += curr_vertex.distance_to(amused_vertex)
-		
-	sad_score.value = sad_distance
+	for emotion in emotion_scores:
+		print("%s : %s" % [emotion, emotion_scores[emotion]])
+		score_updated.emit(emotion, emotion_scores[emotion])
 
 func _export_current_mesh():
-	var export_mdt = MeshDataTool.new()
-	var surface_tool = SurfaceTool.new()
-	surface_tool.create_from(mesh, 0)
-	var array_mesh = surface_tool.commit()
-	ResourceSaver.save(array_mesh, EXPORT_PATH)
+	var export_surface_tool = SurfaceTool.new()
+	export_surface_tool.create_from(mesh, 0)
+	var export_array_mesh = export_surface_tool.commit()
+	ResourceSaver.save(export_array_mesh, EXPORT_PATH, ResourceSaver.FLAG_COMPRESS)
+	
+func get_curr_vertex_data() -> Array:
+	var data = []
+	for face_idx in range (mdt.get_face_count()):
+		for vertex_face_idx in range(NUMBER_OF_VERTICES):	
+			var vertex_idx = mdt.get_face_vertex(face_idx, vertex_face_idx)
+			data.push_back([mdt.get_vertex_normal(vertex_idx), mdt.get_vertex_uv(vertex_idx), vertex_grabbers[vertex_idx].position])
+			
+	return data
+	
+func get_vertex_data(input:MeshDataTool) -> Array:
+	var data = []
+	for face_idx in range (input.get_face_count()):
+		for vertex_face_idx in range(NUMBER_OF_VERTICES):	
+			var vertex_idx = input.get_face_vertex(face_idx, vertex_face_idx)
+			data.push_back([input.get_vertex_normal(vertex_idx), input.get_vertex_uv(vertex_idx), input.get_vertex(vertex_idx)])
+			
+	return data

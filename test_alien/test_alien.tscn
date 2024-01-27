@@ -19,10 +19,6 @@ subdivide_depth = 10
 [node name="AlienMeshInstance3D" type="MeshInstance3D"]
 mesh = SubResource("ImmediateMesh_uk7va")
 script = ExtResource("1_5af45")
-base_reference_mesh = NodePath("ReferenceMesh")
-sad_reference_mesh = NodePath("SadReferenceMesh")
-amused_reference_mesh = NodePath("AmusedReferenceMesh")
-angry_reference_mesh = NodePath("AngryReferenceMesh")
 
 [node name="ReferenceMesh" type="MeshInstance3D" parent="."]
 visible = false

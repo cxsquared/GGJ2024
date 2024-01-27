@@ -11,6 +11,8 @@ projection = 1
 size = 3.0
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
+min_distance = 5.0
+max_distance = 20.0
 
 [node name="DebugExportButton" type="Button" parent="."]
 anchors_preset = 5
@@ -23,3 +25,6 @@ grow_horizontal = 2
 text = "EXPORT"
 
 [node name="AlienMeshInstance3D" parent="." instance=ExtResource("2_oo1a0")]
+
+[connection signal="pressed" from="DebugExportButton" to="AlienMeshInstance3D" method="_export_current_mesh"]
+[connection signal="score_updated" from="AlienMeshInstance3D" to="EmotionsUI" method="_score_updated"]

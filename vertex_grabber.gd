@@ -9,10 +9,9 @@ var selected: bool = false
 
 func _ready() -> void:
 	initial_position = position
-	print(initial_position)
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if selected:
 		var mouse_position = get_viewport().get_mouse_position()
 		var camera = get_viewport().get_camera_3d()
