@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cac6k8w5okkch"]
+
+[node name="EmotionsUI" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Amused" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Amused"]
+layout_mode = 2
+text = "Amused
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/Amused"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Angry" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Angry"]
+layout_mode = 2
+text = "Angry
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/Angry"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Sad" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Sad"]
+layout_mode = 2
+text = "Sad
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/Sad"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwsmrjgcswjac"]
+[gd_scene load_steps=3 format=3 uid="uid://cwsmrjgcswjac"]
 
 [ext_resource type="PackedScene" uid="uid://dk5xvg0klru3k" path="res://alien_mesh_instance_3d.tscn" id="1_uairt"]
+[ext_resource type="PackedScene" uid="uid://cac6k8w5okkch" path="res://emotions_ui.tscn" id="2_xsi4n"]
 
 [node name="Main" type="Node"]
 
@@ -10,3 +11,5 @@ projection = 1
 size = 3.0
 
 [node name="AlienMeshInstance3D" parent="." instance=ExtResource("1_uairt")]
+
+[node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
