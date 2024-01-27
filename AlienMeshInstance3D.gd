@@ -1,6 +1,7 @@
 extends MeshInstance3D
 
 const NUMBER_OF_VERTICES: int = 3
+const EXPORT_PATH: String = "res://export_mesh.tres"
 
 var vertex_grabbers: Dictionary = {}
 var mdt: MeshDataTool = null
@@ -47,3 +48,11 @@ func _process(_delta) -> void:
 			mesh.surface_set_uv(mdt.get_vertex_uv(vertex))
 			mesh.surface_add_vertex(vertex_grabbers[vertex].position)
 	mesh.surface_end()
+
+
+func _export_current_mesh():
+	var export_mdt = MeshDataTool.new()
+	var surface_tool = SurfaceTool.new()
+	surface_tool.create_from(mesh, 0)
+	var array_mesh = surface_tool.commit()
+	ResourceSaver.save(array_mesh, EXPORT_PATH)

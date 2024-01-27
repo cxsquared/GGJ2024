@@ -13,3 +13,15 @@ size = 3.0
 [node name="AlienMeshInstance3D" parent="." instance=ExtResource("1_uairt")]
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
+
+[node name="DebugExportButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 8.0
+grow_horizontal = 2
+text = "EXPORT"
+
+[connection signal="pressed" from="DebugExportButton" to="AlienMeshInstance3D" method="_export_current_mesh"]
