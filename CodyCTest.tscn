@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqfij2nw2sn0s"]
+[gd_scene load_steps=10 format=3 uid="uid://cqfij2nw2sn0s"]
 
 [ext_resource type="Shader" path="res://Dither.gdshader" id="1_1elef"]
 [ext_resource type="Script" path="res://TestImmediate.gd" id="1_adn7c"]
 [ext_resource type="Texture2D" uid="uid://3kgtiqrlkm3f" path="res://support/digital-fractal-1x.png" id="2_k8jro"]
 [ext_resource type="Texture2D" uid="uid://cewv2d5q3r5xq" path="res://support/bayer16.png" id="3_ra2qv"]
+[ext_resource type="Texture2D" uid="uid://bpa64qel6wpig" path="res://support/cubeorsomething_face_test_texture.png" id="4_7mh2f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r0est"]
 shader = ExtResource("1_1elef")
@@ -16,14 +17,22 @@ shader_parameter/u_color_tex = ExtResource("2_k8jro")
 
 [sub_resource type="SphereMesh" id="SphereMesh_cemit"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yixxn"]
+albedo_texture = ExtResource("4_7mh2f")
+
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_fktqy"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_r0est")
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_right = 0.444
+anchor_bottom = 0.785
+offset_right = 0.511963
+offset_bottom = 0.319977
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 
@@ -36,10 +45,11 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 0.629483, 0.777014, 0, -0.777014, 0.629483, 0, 2.01219, 1.46492)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.14353)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.687855, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.687855, 0, -0.0765949)
+material_override = SubResource("StandardMaterial3D_yixxn")
 mesh = SubResource("ImmediateMesh_fktqy")
 skeleton = NodePath("../../..")
 script = ExtResource("1_adn7c")
