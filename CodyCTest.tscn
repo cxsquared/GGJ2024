@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqfij2nw2sn0s"]
+
+[ext_resource type="Shader" path="res://Dither.gdshader" id="1_1elef"]
+[ext_resource type="Script" path="res://TestImmediate.gd" id="1_adn7c"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_n7bhx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bkbg"]
+shader = ExtResource("1_1elef")
+shader_parameter/u_bit_depth = null
+shader_parameter/u_contrast = null
+shader_parameter/u_offset = null
+shader_parameter/u_dither_size = null
+shader_parameter/u_dither_tex = SubResource("ImageTexture_n7bhx")
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_6wo8k"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_1bkbg")
+mesh = SubResource("ImmediateMesh_6wo8k")
+script = ExtResource("1_adn7c")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.94941)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.629483, 0.777014, 0, -0.777014, 0.629483, 0, 2.01219, 1.46492)
