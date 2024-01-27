@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwsmrjgcswjac"]
+
+[ext_resource type="PackedScene" uid="uid://dk5xvg0klru3k" path="res://alien_mesh_instance_3d.tscn" id="1_uairt"]
+
+[node name="Main" type="Node"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.03589)
+
+[node name="AlienMeshInstance3D" parent="." instance=ExtResource("1_uairt")]
