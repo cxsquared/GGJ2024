@@ -30,12 +30,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	var highest_delta = 0
+	var highest_emotion = ""
 	for emotion in emotion_deltas:
 		emotion_deltas[emotion] *= delta_friction
-		print("%s : %s" % [emotion, emotion_deltas[emotion]])
 		
-		if (absf(emotion_deltas[emotion]) > delta_trigger):
-			emotion_change.emit(emotion, emotion_deltas[emotion])
+		if (absf(emotion_deltas[emotion]) > absf(highest_delta)):
+			highest_delta = emotion_deltas[emotion]
+			highest_emotion = emotion
+	
+	if (absf(highest_delta) > delta_trigger):
+			emotion_change.emit(highest_emotion, highest_delta)
 	
 func _score_updated(type, score):
 	if (!bar_dictionary.has(type)):
