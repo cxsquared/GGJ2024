@@ -1,5 +1,7 @@
 extends Node2D
 
+signal finished(type)
+
 @export var sad_image:Texture
 @export var angry_image:Texture
 @export var amused_image:Texture
@@ -9,6 +11,11 @@ extends Node2D
 
 @onready var emotionParticle = $EmotionParticle
 @onready var directionParticle = $DirectionParticle
+
+var is_finished = false
+var is_started = false
+
+var type:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,9 +35,14 @@ func start(emotion, delta):
 	else:
 		directionParticle.texture = down
 		
+	type = emotion
+		
 	emotionParticle.restart()
 	directionParticle.restart()
+	is_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (is_started && !is_finished && !$EmotionParticle.emitting):
+		is_finished = true
+		finished.emit(type)
