@@ -9,7 +9,6 @@ var selected: bool = false
 
 func _ready() -> void:
 	initial_position = position
-	print(initial_position)
 
 
 func _process(delta) -> void:
