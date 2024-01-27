@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+signal emotion_change(type, delta)
+signal emotion_score_updated(type, score)
+
 @export var amused_bar:ProgressBar
 @export var angry_bar:ProgressBar
 @export var sad_bar:ProgressBar
@@ -13,10 +16,9 @@ var emotion_deltas = {
 	"amused": 0
 }
 
-var delta_friction:float = .9
-var max_delta:float = 10
-
-signal emotion_score_updated(type, score)
+@export var delta_friction:float = .95
+@export var max_delta:float = 3
+@export var delta_trigger:float = 2
 
 var bar_dictionary:Dictionary = {}
 
@@ -31,6 +33,9 @@ func _process(_delta):
 	for emotion in emotion_deltas:
 		emotion_deltas[emotion] *= delta_friction
 		print("%s : %s" % [emotion, emotion_deltas[emotion]])
+		
+		if (absf(emotion_deltas[emotion]) > delta_trigger):
+			emotion_change.emit(emotion, emotion_deltas[emotion])
 	
 func _score_updated(type, score):
 	if (!bar_dictionary.has(type)):
