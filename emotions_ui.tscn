@@ -34,7 +34,6 @@ max_distance = 30.0
 delta_trigger = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 offset_left = 834.0
 offset_top = 559.0
 offset_right = 1152.0

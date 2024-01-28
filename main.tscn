@@ -18,7 +18,7 @@ size = 3.0
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
 min_distance = 35.0
-max_distance = 50.0
+max_distance = 70.0
 max_delta = 2.0
 delta_trigger = 0.75
 

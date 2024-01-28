@@ -48,6 +48,15 @@ func _process(_delta):
 	
 	if (absf(highest_delta) > delta_trigger):
 			emotion_change.emit(highest_emotion, highest_delta)
+			
+	if !gameEnded && has_player_won():
+		gameEnded = true
+		end_game.emit()
+		$Victory1.emitting = true
+		$Victory2.emitting = true
+	
+func has_player_won():
+	return amused_bar.value > sad_bar.value && amused_bar.value > angry_bar.value && amused_bar.value > 55
 	
 func _score_updated(type, score):
 	if (!bar_dictionary.has(type)):
@@ -60,12 +69,6 @@ func _update_bar(bar:ProgressBar, score:float, type:String):
 	bar.value = remap(score, max_distance, min_distance, bar.min_value, bar.max_value)
 	emotion_deltas[type] = clampf(emotion_deltas[type] + bar.value - prevValue, -max_delta, max_delta)
 	emotion_score_updated.emit(type, bar.value)
-	
-	if (!gameEnded && type == "amused" && bar.value > 55):
-		gameEnded = true
-		end_game.emit()
-		$Victory1.emitting = true
-		$Victory2.emitting = true
 		
 
 func _on_start_pressed():
