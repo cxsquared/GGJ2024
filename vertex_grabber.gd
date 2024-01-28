@@ -1,6 +1,8 @@
 extends Area3D
 
 @export_range(0, 1, 0.1) var drag_range: float
+@export_range(0, 1, 0.01) var smudge_range: float
+@export_range(0, 1, 0.1) var selected_exit_range: float
 
 var initial_position: Vector3 = Vector3(0, 0, 0)
 var mouse_pressed: bool = false
@@ -11,17 +13,31 @@ func _ready() -> void:
 	initial_position = position
 
 func _process(_delta) -> void:
+	if hovered && mouse_pressed && !selected:
+		var mouse_position = get_viewport().get_mouse_position()
+		var camera = get_viewport().get_camera_3d()
+		var origin = camera.project_ray_origin(mouse_position)
+		var relative_mouse_position = Vector3(origin.x, position.y, origin.z)
+		var distance = (relative_mouse_position - initial_position).length()
+		if  distance < smudge_range:
+			print("selected")
+			selected = true
+		
 	if selected:
 		var mouse_position = get_viewport().get_mouse_position()
 		var camera = get_viewport().get_camera_3d()
 		var origin = camera.project_ray_origin(mouse_position)
 		var new_position = Vector3(origin.x, position.y, origin.z)
+		var distance = (new_position - initial_position).length()
 		# If we are out of range, set the position to the max range in the same direction
-		if (new_position - initial_position).length() > drag_range:
+		if distance > drag_range:
 			position = initial_position + drag_range * (new_position - initial_position).normalized()
 		else:
 			position = new_position
-
+		
+		if distance > selected_exit_range:
+			selected = false
+		
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -38,10 +54,12 @@ func _input(event: InputEvent) -> void:
 func _on_mouse_entered():
 	if !mouse_pressed:
 		$HoverIndicator.visible = true
+		
 	hovered = true
 
 
 func _on_mouse_exited():
 	if !selected:
 		$HoverIndicator.visible = false
+		
 	hovered = false

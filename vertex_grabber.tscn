@@ -13,6 +13,8 @@ radius = 0.09
 [node name="VertexGrabber" type="Area3D"]
 script = ExtResource("1_40ycg")
 drag_range = 0.1
+smudge_range = 0.35
+selected_exit_range = 0.6
 
 [node name="HoverIndicator" type="MeshInstance3D" parent="."]
 visible = false
