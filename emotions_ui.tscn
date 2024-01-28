@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cac6k8w5okkch"]
+[gd_scene load_steps=10 format=3 uid="uid://cac6k8w5okkch"]
 
 [ext_resource type="Script" path="res://emotions_ui.gd" id="1_0i4il"]
 [ext_resource type="Texture2D" uid="uid://dkyhktktbrlp3" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceHappy.png" id="2_gemqs"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ccmuwibw3xswg" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceAngry.png" id="5_06gjw"]
 [ext_resource type="Texture2D" uid="uid://cdcdtrctnsfxl" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_laugh.png" id="6_tt2y7"]
 [ext_resource type="Script" path="res://EmotionParticleController.gd" id="8_4ssgc"]
+[ext_resource type="Texture2D" uid="uid://w2tg818mu03s" path="res://currtain_top.png" id="8_iye0b"]
+[ext_resource type="Texture2D" uid="uid://dd80xxpsm6nr7" path="res://currtain_side.png" id="9_y62vy"]
 
 [node name="EmotionsUI" type="CanvasLayer" node_paths=PackedStringArray("amused_bar", "angry_bar", "sad_bar")]
 script = ExtResource("1_0i4il")
@@ -18,6 +20,7 @@ max_distance = 30.0
 delta_trigger = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -72,10 +75,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 841.0
-offset_top = 10.0
-offset_right = 881.0
-offset_bottom = 50.0
+z_index = 3
+offset_left = 854.0
+offset_top = 88.0
+offset_right = 894.0
+offset_bottom = 128.0
 scale = Vector2(2.32, 2.32)
 texture = ExtResource("2_gemqs")
 script = ExtResource("3_4ent5")
@@ -86,6 +90,37 @@ happy_bubble = ExtResource("2_gemqs")
 
 [node name="EmotionParticleController" type="Node" parent="."]
 script = ExtResource("8_4ssgc")
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = -3
+position = Vector2(0, -27)
+
+[node name="TextureRect3" type="TextureRect" parent="Node2D"]
+z_index = 1
+offset_left = 63.0
+offset_top = -310.0
+offset_right = 3543.0
+offset_bottom = 1214.0
+scale = Vector2(0.320001, 0.320001)
+texture = ExtResource("8_iye0b")
+
+[node name="TextureRect" type="TextureRect" parent="Node2D"]
+offset_left = -400.0
+offset_top = -25.0
+offset_right = 1668.0
+offset_bottom = 3231.0
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("9_y62vy")
+
+[node name="TextureRect5" type="TextureRect" parent="Node2D"]
+z_index = -2
+offset_left = 1007.0
+offset_top = -32.0
+offset_right = 3075.0
+offset_bottom = 3224.0
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("9_y62vy")
+flip_h = true
 
 [connection signal="emotion_change" from="." to="EmotionParticleController" method="emotion_changed"]
 [connection signal="emotion_score_updated" from="." to="TextureRect" method="update_emotion"]
