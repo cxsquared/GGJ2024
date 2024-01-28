@@ -15,7 +15,7 @@ albedo_texture = ExtResource("2_6m25o")
 [sub_resource type="PlaneMesh" id="PlaneMesh_sdqab"]
 material = SubResource("StandardMaterial3D_vjsfl")
 size = Vector2(4, 2)
-subdivide_width = 10
+subdivide_width = 20
 subdivide_depth = 10
 
 [node name="AlienMeshInstance3D" type="MeshInstance3D"]
