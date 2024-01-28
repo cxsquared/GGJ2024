@@ -89,7 +89,7 @@ func _calculate_emotion() -> void:
 			emotion_scores[emotion] += current_vertex.distance_to(emotion_vertex)
 	
 	for emotion in emotion_scores:
-		#print("%s : %s" % [emotion, emotion_scores[emotion]])
+		print("%s : %s" % [emotion, emotion_scores[emotion]])
 		score_updated.emit(emotion, emotion_scores[emotion])
 
 func _export_current_mesh():

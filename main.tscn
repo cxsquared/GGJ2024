@@ -17,18 +17,19 @@ projection = 1
 size = 3.0
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
-min_distance = 17.5
-max_distance = 22.5
+min_distance = 10.0
+max_distance = 24.0
 max_delta = 2.0
 
 [node name="DebugExportButton" type="Button" parent="."]
-visible = false
+z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -4.0
-offset_right = 4.0
-offset_bottom = 8.0
+offset_left = -34.5
+offset_top = 616.0
+offset_right = 34.5
+offset_bottom = 647.0
 grow_horizontal = 2
 text = "EXPORT"
 
