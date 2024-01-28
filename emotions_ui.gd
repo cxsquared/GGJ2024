@@ -3,6 +3,8 @@ extends CanvasLayer
 signal emotion_change(type, delta)
 signal emotion_score_updated(type, score)
 signal end_game()
+signal start_game()
+signal restart()
 
 @export var amused_bar:ProgressBar
 @export var angry_bar:ProgressBar
@@ -59,7 +61,29 @@ func _update_bar(bar:ProgressBar, score:float, type:String):
 	emotion_deltas[type] = clampf(emotion_deltas[type] + bar.value - prevValue, -max_delta, max_delta)
 	emotion_score_updated.emit(type, bar.value)
 	
-	if (!gameEnded && type == "amused" && bar.value > 69):
+	if (!gameEnded && type == "amused" && bar.value > 55):
 		gameEnded = true
 		end_game.emit()
+		$Victory1.emitting = true
+		$Victory2.emitting = true
 		
+
+func _on_start_pressed():
+	$Title.visible = false
+	$EmotionBox.visible = true
+	start_game.emit()
+	$Menu.visible = false
+
+
+func _on_credits_pressed():
+	$Title.visible = false
+	$Menu.visible = false
+	$CreditsText.visible = true
+	$Credits.visible = true
+
+
+func _on_back_pressed():
+	$Title.visible = true
+	$Menu.visible = true
+	$CreditsText.visible = false
+	$Credits.visible = false

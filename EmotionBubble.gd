@@ -36,7 +36,7 @@ func _process(_delta):
 			"angry":
 				texture = angry_bubble
 			"amused":
-				if (highest_score > 69): #nice
+				if (highest_score > 55): #nice
 					texture = amused_bubble
 				else:
 					texture = happy_bubble

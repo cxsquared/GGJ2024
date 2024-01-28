@@ -12,9 +12,13 @@ var emotion_meshes = {}
 var emotion_mdts = {}
 var emotion_verts = {}
 
+var calculate_score = false
+
 @onready var VertexGrabberScene = preload("res://vertex_grabber.tscn")
 
 func _ready() -> void:
+	visible=false
+	
 	#Init emotions
 	emotion_meshes = {
 		"sad": $SadReferenceMesh.mesh,
@@ -72,7 +76,8 @@ func _process(_delta) -> void:
 
 	mesh.surface_end()
 	
-	_calculate_emotion()
+	if calculate_score:
+		_calculate_emotion()
 
 func _calculate_emotion() -> void:
 	var emotion_scores = {}
@@ -89,7 +94,7 @@ func _calculate_emotion() -> void:
 			emotion_scores[emotion] += current_vertex.distance_to(emotion_vertex)
 	
 	for emotion in emotion_scores:
-		#print("%s : %s" % [emotion, emotion_scores[emotion]])
+		print("%s : %s" % [emotion, emotion_scores[emotion]])
 		score_updated.emit(emotion, emotion_scores[emotion])
 
 func _export_current_mesh():
@@ -115,3 +120,8 @@ func get_vertex_data(input:MeshDataTool) -> Array:
 			data.push_back([input.get_vertex_normal(vertex_idx), input.get_vertex_uv(vertex_idx), input.get_vertex(vertex_idx)])
 			
 	return data
+
+
+func _on_emotions_ui_start_game():
+	calculate_score = true
+	visible = true

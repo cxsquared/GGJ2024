@@ -42,7 +42,7 @@ func start(emotion, delta):
 	is_started = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (is_started && !is_finished && !$EmotionParticle.emitting):
 		is_finished = true
 		finished.emit(type)

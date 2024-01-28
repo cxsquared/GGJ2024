@@ -17,11 +17,13 @@ projection = 1
 size = 3.0
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
-min_distance = 10.0
-max_distance = 24.0
+min_distance = 35.0
+max_distance = 50.0
 max_delta = 2.0
+delta_trigger = 0.75
 
 [node name="DebugExportButton" type="Button" parent="."]
+visible = false
 z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
@@ -44,5 +46,6 @@ transform = Transform3D(3.45835, 0, 0, 0, 1, 0, 0, 0, 3.45835, 0, -1.00542, 0)
 mesh = SubResource("PlaneMesh_egu48")
 surface_material_override/0 = SubResource("StandardMaterial3D_k4rit")
 
+[connection signal="start_game" from="EmotionsUI" to="AlienMeshInstance3D" method="_on_emotions_ui_start_game"]
 [connection signal="pressed" from="DebugExportButton" to="AlienMeshInstance3D" method="_export_current_mesh"]
 [connection signal="score_updated" from="AlienMeshInstance3D" to="EmotionsUI" method="_score_updated"]

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cesehdh1p3ded"]
+
+[ext_resource type="Shader" path="res://wobble.gdshader" id="1_rj75i"]
+[ext_resource type="Texture2D" uid="uid://bk1xefq4syfl0" path="res://monster.png" id="2_p8egc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_rj75i")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/normal_offset = 0.02
+shader_parameter/time_influence = 3.0
+shader_parameter/y_div = 2.87
+shader_parameter/texture_albedo = ExtResource("2_p8egc")
