@@ -1,19 +1,19 @@
 [gd_scene load_steps=17 format=3 uid="uid://cac6k8w5okkch"]
 
 [ext_resource type="Script" path="res://emotions_ui.gd" id="1_0i4il"]
-[ext_resource type="Texture2D" uid="uid://dkyhktktbrlp3" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceHappy.png" id="2_gemqs"]
 [ext_resource type="Script" path="res://EmotionBubble.gd" id="3_4ent5"]
-[ext_resource type="Texture2D" uid="uid://bkqycx7o8ag6e" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceSad.png" id="4_8tiw3"]
-[ext_resource type="Texture2D" uid="uid://ccmuwibw3xswg" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_faceAngry.png" id="5_06gjw"]
-[ext_resource type="Texture2D" uid="uid://cdcdtrctnsfxl" path="res://kenney_emotes-pack/PNG/Vector/Style 1/emote_laugh.png" id="6_tt2y7"]
+[ext_resource type="Texture2D" uid="uid://dkyhktktbrlp3" path="res://emote_faceHappy.png" id="5_2gyaf"]
+[ext_resource type="Texture2D" uid="uid://bkqycx7o8ag6e" path="res://emote_faceSad.png" id="7_mstyh"]
 [ext_resource type="Script" path="res://EmotionParticleController.gd" id="8_4ssgc"]
+[ext_resource type="Texture2D" uid="uid://ccmuwibw3xswg" path="res://emote_faceAngry.png" id="8_akklt"]
 [ext_resource type="Texture2D" uid="uid://w2tg818mu03s" path="res://currtain_top.png" id="8_iye0b"]
+[ext_resource type="Texture2D" uid="uid://cdcdtrctnsfxl" path="res://emote_laugh.png" id="9_ajd0u"]
 [ext_resource type="Texture2D" uid="uid://dd80xxpsm6nr7" path="res://currtain_side.png" id="9_y62vy"]
 [ext_resource type="Texture2D" uid="uid://016gxb7lefc4" path="res://start.png" id="10_cf24i"]
 [ext_resource type="Texture2D" uid="uid://dxlcxs0ixmsqu" path="res://credits.png" id="11_txela"]
 [ext_resource type="Texture2D" uid="uid://ccqi0c7iny8b7" path="res://title.png" id="12_yg522"]
 [ext_resource type="Texture2D" uid="uid://bhf003fhi5osw" path="res://back.png" id="13_ove14"]
-[ext_resource type="Texture2D" uid="uid://bj6285h3d1s6r" path="res://kenney_emotes-pack/PNG/Vector/Style 8/emote_star.png" id="14_tiwxv"]
+[ext_resource type="Texture2D" uid="uid://bj6285h3d1s6r" path="res://emote_star.png" id="14_w2xmd"]
 
 [sub_resource type="SystemFont" id="SystemFont_vf4jf"]
 
@@ -183,13 +183,13 @@ size_flags_vertical = 3
 [node name="TextureRect" type="TextureRect" parent="EmotionBox"]
 z_index = 3
 layout_mode = 2
-texture = ExtResource("2_gemqs")
+texture = ExtResource("5_2gyaf")
 stretch_mode = 4
 script = ExtResource("3_4ent5")
-sad_bubble = ExtResource("4_8tiw3")
-angry_bubble = ExtResource("5_06gjw")
-amused_bubble = ExtResource("6_tt2y7")
-happy_bubble = ExtResource("2_gemqs")
+sad_bubble = ExtResource("7_mstyh")
+angry_bubble = ExtResource("8_akklt")
+amused_bubble = ExtResource("9_ajd0u")
+happy_bubble = ExtResource("5_2gyaf")
 
 [node name="Menu" type="MarginContainer" parent="."]
 anchors_preset = 7
@@ -299,7 +299,7 @@ texture_focused = ExtResource("13_ove14")
 position = Vector2(1076, 641)
 emitting = false
 amount = 12
-texture = ExtResource("14_tiwxv")
+texture = ExtResource("14_w2xmd")
 direction = Vector2(-1, -1)
 spread = 65.0
 gravity = Vector2(0, 978.71)
@@ -312,7 +312,7 @@ angular_velocity_max = 261.82
 position = Vector2(126, 641)
 emitting = false
 amount = 12
-texture = ExtResource("14_tiwxv")
+texture = ExtResource("14_w2xmd")
 direction = Vector2(1, -1)
 spread = 65.0
 gravity = Vector2(0, 978.71)

@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://bw5j1ijg3pe2r"]
 
 [ext_resource type="Script" path="res://EmotionChangeIndicator.gd" id="1_46x42"]
-[ext_resource type="Texture2D" uid="uid://d1pulrnx8dad6" path="res://kenney_emotes-pack/PNG/Vector/Style 8/emote_faceSad.png" id="2_qpu1e"]
-[ext_resource type="Texture2D" uid="uid://bnpo2qe83c5mu" path="res://kenney_emotes-pack/PNG/Vector/Style 8/emote_faceAngry.png" id="3_jcnhe"]
-[ext_resource type="Texture2D" uid="uid://cp1o802ompqm3" path="res://kenney_emotes-pack/PNG/Vector/Style 8/emote_laugh.png" id="4_ic6n1"]
+[ext_resource type="Texture2D" uid="uid://d1pulrnx8dad6" path="res://emote_faceSad (2).png" id="2_hlvu3"]
+[ext_resource type="Texture2D" uid="uid://cp1o802ompqm3" path="res://emote_laugh (2).png" id="4_7yteg"]
 [ext_resource type="Texture2D" uid="uid://c260qumbccup7" path="res://support/arrowUp.png" id="5_khqcv"]
 [ext_resource type="Texture2D" uid="uid://d2arsktqsggkn" path="res://support/arrowDown.png" id="6_ge8j4"]
+[ext_resource type="Texture2D" uid="uid://bnpo2qe83c5mu" path="res://emote_faceAngry (2).png" id="7_dyhg3"]
 
 [node name="EmotionChangeIndicator" type="Node2D"]
 position = Vector2(572, 319)
 script = ExtResource("1_46x42")
-sad_image = ExtResource("2_qpu1e")
-angry_image = ExtResource("3_jcnhe")
-amused_image = ExtResource("4_ic6n1")
+sad_image = ExtResource("2_hlvu3")
+angry_image = ExtResource("7_dyhg3")
+amused_image = ExtResource("4_7yteg")
 up = ExtResource("5_khqcv")
 down = ExtResource("6_ge8j4")
 
@@ -21,7 +21,7 @@ emitting = false
 amount = 4
 lifetime = 0.5
 one_shot = true
-texture = ExtResource("3_jcnhe")
+texture = ExtResource("7_dyhg3")
 emission_shape = 1
 emission_sphere_radius = 1.0
 direction = Vector2(0, 0)
