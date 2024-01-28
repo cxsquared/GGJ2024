@@ -11,10 +11,12 @@ projection = 1
 size = 3.0
 
 [node name="EmotionsUI" parent="." instance=ExtResource("2_xsi4n")]
-min_distance = 5.0
-max_distance = 20.0
+min_distance = 17.5
+max_distance = 22.5
+max_delta = 2.0
 
 [node name="DebugExportButton" type="Button" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -25,6 +27,9 @@ grow_horizontal = 2
 text = "EXPORT"
 
 [node name="AlienMeshInstance3D" parent="." instance=ExtResource("2_oo1a0")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.851031, 0.525115, 0, -0.525115, 0.851031, 0, 1.87745, 2.70883)
 
 [connection signal="pressed" from="DebugExportButton" to="AlienMeshInstance3D" method="_export_current_mesh"]
 [connection signal="score_updated" from="AlienMeshInstance3D" to="EmotionsUI" method="_score_updated"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d181hsjayogol"]
 
 [ext_resource type="Script" path="res://alien.gd" id="1_5af45"]
-[ext_resource type="Texture2D" uid="uid://dc01lkk0hg4q6" path="res://icon.svg" id="2_aiga8"]
+[ext_resource type="Texture2D" uid="uid://bk1xefq4syfl0" path="res://monster.png" id="2_6m25o"]
 [ext_resource type="ArrayMesh" path="res://test_alien/sad_mesh.tres" id="3_ruy2t"]
 [ext_resource type="ArrayMesh" path="res://test_alien/amused_mesh.tres" id="4_rgkdw"]
 [ext_resource type="ArrayMesh" path="res://test_alien/angry_mesh.tres" id="5_8lf08"]
@@ -9,10 +9,12 @@
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_uk7va"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjsfl"]
-albedo_texture = ExtResource("2_aiga8")
+transparency = 1
+albedo_texture = ExtResource("2_6m25o")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sdqab"]
 material = SubResource("StandardMaterial3D_vjsfl")
+size = Vector2(4, 2)
 subdivide_width = 10
 subdivide_depth = 10
 

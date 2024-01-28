@@ -13,10 +13,11 @@ script = ExtResource("1_0i4il")
 amused_bar = NodePath("MarginContainer/VBoxContainer/Amused/ProgressBar")
 angry_bar = NodePath("MarginContainer/VBoxContainer/Angry/ProgressBar")
 sad_bar = NodePath("MarginContainer/VBoxContainer/Sad/ProgressBar")
-delta_trigger = 1.5
+min_distance = 20.0
+max_distance = 30.0
+delta_trigger = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -71,16 +72,17 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 760.0
-offset_top = 59.0
-offset_right = 800.0
-offset_bottom = 99.0
+offset_left = 841.0
+offset_top = 10.0
+offset_right = 881.0
+offset_bottom = 50.0
 scale = Vector2(2.32, 2.32)
 texture = ExtResource("2_gemqs")
 script = ExtResource("3_4ent5")
 sad_bubble = ExtResource("4_8tiw3")
 angry_bubble = ExtResource("5_06gjw")
 amused_bubble = ExtResource("6_tt2y7")
+happy_bubble = ExtResource("2_gemqs")
 
 [node name="EmotionParticleController" type="Node" parent="."]
 script = ExtResource("8_4ssgc")

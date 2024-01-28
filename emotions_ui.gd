@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal emotion_change(type, delta)
 signal emotion_score_updated(type, score)
+signal end_game()
 
 @export var amused_bar:ProgressBar
 @export var angry_bar:ProgressBar
@@ -9,6 +10,8 @@ signal emotion_score_updated(type, score)
 
 @export var min_distance:float = 10
 @export var max_distance:float = 200
+
+var gameEnded = false
 
 var emotion_deltas = {
 	"sad": 0,
@@ -35,6 +38,8 @@ func _process(_delta):
 	for emotion in emotion_deltas:
 		emotion_deltas[emotion] *= delta_friction
 		
+		#print("%s : %s" % [emotion, emotion_deltas[emotion]])
+		
 		if (absf(emotion_deltas[emotion]) > absf(highest_delta)):
 			highest_delta = emotion_deltas[emotion]
 			highest_emotion = emotion
@@ -53,3 +58,8 @@ func _update_bar(bar:ProgressBar, score:float, type:String):
 	bar.value = remap(score, max_distance, min_distance, bar.min_value, bar.max_value)
 	emotion_deltas[type] = clampf(emotion_deltas[type] + bar.value - prevValue, -max_delta, max_delta)
 	emotion_score_updated.emit(type, bar.value)
+	
+	if (!gameEnded && type == "amused" && bar.value > 69):
+		gameEnded = true
+		end_game.emit()
+		

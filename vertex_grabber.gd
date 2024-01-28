@@ -10,7 +10,6 @@ var selected: bool = false
 func _ready() -> void:
 	initial_position = position
 
-
 func _process(_delta) -> void:
 	if selected:
 		var mouse_position = get_viewport().get_mouse_position()

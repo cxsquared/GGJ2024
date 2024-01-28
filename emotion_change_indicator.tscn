@@ -19,6 +19,7 @@ down = ExtResource("6_ge8j4")
 [node name="EmotionParticle" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 4
+lifetime = 0.5
 one_shot = true
 texture = ExtResource("3_jcnhe")
 emission_shape = 1
@@ -38,6 +39,7 @@ scale_amount_max = 4.0
 [node name="DirectionParticle" type="CPUParticles2D" parent="."]
 emitting = false
 amount = 2
+lifetime = 0.5
 one_shot = true
 texture = ExtResource("5_khqcv")
 emission_shape = 1
